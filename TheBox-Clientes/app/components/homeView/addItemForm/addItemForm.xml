@@ -1,0 +1,41 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" actionBarHidden="true" loaded="pageLoaded" id="homeViewModelAddScreen" cssClass="screen">
+    <GridLayout rows="auto, *">
+        <GridLayout rows="auto, *" cssClass="page-header">
+            <GridLayout cssClass="action-bar" columns="auto, *, auto">
+                <Button text="Cancel" onTap="onCancelTap" />
+                <Label col="1" text="Create" cssClass="action-bar-title" />
+                <Button col="2" text="Save" onTap="onSaveTap" />
+            </GridLayout>
+            <!-- Workaround for one sided border -->
+            <StackLayout row="1" cssClass="action-bar-border" height="1"></StackLayout>
+        </GridLayout>
+
+        <StackLayout row="1">
+            <ScrollView>
+
+                <StackLayout row="1">
+
+
+                    <GridLayout columns="*" rows="auto, auto" cssClass="form-item field field--text" id="telefonoField">
+
+
+                        <Label text="Telefono" cssClass="label" col="1" row="0" />
+
+
+                        <TextField col="1" row="1" text="{{ telefono }}" />
+
+                        <!-- telefono content -->
+
+                    </GridLayout>
+
+                    <StackLayout cssClass="form-item-border" height="1"></StackLayout>
+                    <!-- editableListForm2 additional fields -->
+
+                </StackLayout>
+                <!-- additional view content -->
+
+            </ScrollView>
+        </StackLayout>
+    </GridLayout>
+
+</Page>
