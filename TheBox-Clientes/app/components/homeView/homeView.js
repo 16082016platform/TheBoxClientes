@@ -9,6 +9,8 @@ var color_1 = require("color");
 var enums = require("ui/enums");
 var http = require("http");
 var common = require('~/common.js');
+var app = require("application");
+var platform = require("platform");
 
 exports.resetCount = function () {
     common.resetCount();
@@ -25,6 +27,19 @@ function pageLoaded(args) {
         isInit = false;
     }
 
+    var View = android.view.View;
+    if (app.android) {
+        var window = app.android.startActivity.getWindow();
+        // set the status bar to Color.Transparent
+        var decorView = window.getDecorView();
+        decorView.setSystemUiVisibility(
+            View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
+            | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
+            | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
+    }
 }
 exports.pageLoaded = pageLoaded;
 
@@ -170,7 +185,7 @@ exports.tapEnviar = function (args) {
 
     if (validarTextField()) {
         var btn = args.object;
-        // btn.visibility = "collapsed";
+        btn.visibility = "collapsed";
 
         viewModel.set("isLoading", true);
 
@@ -205,10 +220,9 @@ exports.tapEnviar = function (args) {
     } else {
         viewModel.set("isLoading", false);
     }
-}
+} 
 
 function sendEmailCliente() {
-    viewModel.set("modalSolicitud", false);
     viewModel.set("modalMensaje", true);
 
     var data = JSON.stringify({
@@ -226,8 +240,8 @@ function sendEmailCliente() {
         headers: { "Content-Type": "application/json" },
         content: data
     }).then(function (response) {
-        viewModel.set("modalSolicitud", false);
-        viewModel.set("modalMensaje", true);
+        // viewModel.set("modalSolicitud", true);
+        // viewModel.set("modalMensaje", true);
         page.getViewById("nombre").text = "";
         page.getViewById("correo").text = "";
         page.getViewById("celular").text = "";
@@ -257,3 +271,23 @@ function errores(err) {
             break;
     }
 }
+
+
+exports.tapGoToTienda = function (args) {
+    viewModel.set("modalSolicitud", false);
+    viewModel.set("modalMensaje", false);
+    viewModel.set("modalTienda", true);
+}
+
+exports.tapGoToBack = function (args) {
+    var tienda = page.getViewById("tienda");
+    if (tienda.url == "https://www.thebox.com.pe/" ) {
+        viewModel.set("modalSolicitud", true);
+        viewModel.set("modalMensaje", false);
+        viewModel.set("modalTienda", false);
+    } else {
+        tienda.goBack();
+    }
+}
+
+

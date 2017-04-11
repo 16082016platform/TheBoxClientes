@@ -10,7 +10,7 @@ Page {
 .mensaje {
     background-color: #000;
     opacity: 0.3;
-    height: 30%;
+    height: 23%;
 }
 
 .mensajeLabel {
@@ -59,6 +59,15 @@ TextField {
     border-color: #fff;
     margin-top: 200;
     background-color: #aaa;
+}
+
+.labelGracias{
+    margin-top: 100;
+}
+
+.labelTienda{
+    margin-top: 200;
+    text-decoration: underline;
 }
 
 .modalMensaje {

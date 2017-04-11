@@ -7,17 +7,17 @@
             <VideoPlayer:Video id="nativeVideoPlayer"
                 loop="true" autoplay="true" height="100%" width="100%" tap="tapVideo"
                 src="~/videos/video.mp4" />
-            <StackLayout cssClass="mensaje" verticalAlignment="middle"  visibility="{{modalMensaje==false?'visible':'collapsed'}}" >
+            <StackLayout cssClass="mensaje" verticalAlignment="bottom"  visibility="{{modalMensaje==false?'visible':'collapsed'}}" >
             </StackLayout>
-            <StackLayout verticalAlignment="middle" visibility="{{modalMensaje==false?'visible':'collapsed'}}" >
-                <Label cssClass="mensajeLabel" text="¿No encuentra el producto de su talla?" textWrap="true"/>
-                <Label cssClass="mensajeLabel" text="Toque la pantalla y enviaremos el producto a su casa" textWrap="true"/>
+            <StackLayout verticalAlignment="bottom" visibility="{{modalMensaje==false?'visible':'collapsed'}}" >
+                <Label cssClass="mensajeLabel" text="¿No encuentras el producto de tu talla?" textWrap="true"/>
+                <Label cssClass="mensajeLabel" text="Ingrese a la tienda online" textWrap="true"/>
             </StackLayout>
         </GridLayout> 
         <!--GRID SOLICITUD-->
         <GridLayout id="modalSolicitud" cssClass="modalSolicitud" touch="resetCount" visibility="{{modalSolicitud==true?'visible':'collapsed'}}" >
             <StackLayout cssClass="contenedor" >
-                <Label cssClass="cabecera" text="Ingrese tus datos para enterarte de nuestros eventos." textWrap="true" />
+                <Label cssClass="cabecera" text="Ingrese tus datos para enterarte de nuestros eventos y promociones." textWrap="true" />
                 <TextField id="nombre" hint="Nombre" propertyChange="textChange" />
                 <Label id="validarNombre" text="Ingrese su nombre" class="validar" visibility="{{validarNombre?'visible':'collapsed'}}" />
                 <TextField id="correo" hint="Correo"  keyboardType="email" autocorrect="false" autocapitalizationType="none" propertyChange="textChange" />
@@ -25,13 +25,22 @@
                 <TextField id="celular" hint="Celular" keyboardType="phone" loaded="maxLengthCelular" propertyChange="textChange" />
                 <Label id="validarCelular" text="Ingrese un celular válido" class="validar" visibility="{{validarCelular?'visible':'collapsed'}}" />
                 
-                <Label id="enviar" cssClass="button" text="Enviar" tap="tapEnviar" />
+                <Label id="enviar" cssClass="button" text="Enviar" tap="tapEnviar" visibility="{{modalMensaje==true?'collapsed':'visible'}}" />
+                <Label cssClass="labelGracias" text="Gracias por registrarse en The Box. Puede ingresar a la tienda virtual seleccionando este link." textWrap="true" visibility="{{modalMensaje==true?'visible':'collapsed'}}" tap="tapGoToTienda" />
+                
+                <Label id="vertienda" cssClass="labelTienda" text="Llévame a la tienda online" tap="tapGoToTienda" />
+
             </StackLayout>
             <Image src="~/images/logo.jpg" verticalAlignment="bottom" horizontalAlignment="right" height="250" width="250" />
         </GridLayout>
         <!--GRID CONFIRMACION-->
-        <GridLayout id="modalMensaje" cssClass="modalMensaje" visibility="{{modalMensaje==true?'visible':'collapsed'}}" >
+        <GridLayout id="modalMensaje" cssClass="modalMensaje" visibility="collapsed" >
             <Label text="Gracias por solicitar su afiliación." textWrap="true" />
+        </GridLayout>
+        <!--GRID TIENDA-->
+        <GridLayout id="modalTienda" cssClass="modalTienda" visibility="{{modalTienda==true?'visible':'collapsed'}}" >
+            <WebView id="tienda" src="https://www.thebox.com.pe/" />
+            <Image src="~/images/back.png" tap="tapGoToBack" stretch="none" verticalAlignment="bottom" />
         </GridLayout>
     </GridLayout>
 </Page>
