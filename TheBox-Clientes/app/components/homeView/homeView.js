@@ -210,17 +210,13 @@ exports.tapEnviar = function (args) {
 function sendEmailCliente() {
     viewModel.set("modalSolicitud", false);
     viewModel.set("modalMensaje", true);
-    var info = page.getViewById("nombre").text;
-    var correo = page.getViewById("correo").text;
-    // page.getViewById("correo").text = html;
-    // "CORREO: vemalavers@unc.edu.pe<br/>TELEFONO: 986709663<br/>DNI: 46679559<br/>Crédito vehicular"
 
     var data = JSON.stringify({
         "TemplateName": "Bienvenida",
-        "Recipients": correo,
+        "Recipients": [page.getViewById("correo").text],
         "Context": {
             "NotificationSubject": "Bienvenido a The Box!",
-            "MessageBody": info
+            "MessageBody": page.getViewById("nombre").text
         }
     });
 
@@ -230,11 +226,11 @@ function sendEmailCliente() {
         headers: { "Content-Type": "application/json" },
         content: data
     }).then(function (response) {
-        viewModel("modalSolicitud", false);
-        viewModel("modalMensaje", true);
-        page.getViewById("modalSolicitud").visibility = "collapsed";
-        page.getViewById("modalMensaje").visibility = "visible";
-        page.request();
+        viewModel.set("modalSolicitud", false);
+        viewModel.set("modalMensaje", true);
+        page.getViewById("nombre").text = "";
+        page.getViewById("correo").text = "";
+        page.getViewById("celular").text = "";
     }, function (e) {
         onRequestFail(e);
     });

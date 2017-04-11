@@ -17,7 +17,7 @@
         <!--GRID SOLICITUD-->
         <GridLayout id="modalSolicitud" cssClass="modalSolicitud" touch="resetCount" visibility="{{modalSolicitud==true?'visible':'collapsed'}}" >
             <StackLayout cssClass="contenedor" >
-                <Label cssClass="cabecera" text="Compra" textWrap="true" />
+                <Label cssClass="cabecera" text="Ingrese tus datos para enterarte de nuestros eventos." textWrap="true" />
                 <TextField id="nombre" hint="Nombre" propertyChange="textChange" />
                 <Label id="validarNombre" text="Ingrese su nombre" class="validar" visibility="{{validarNombre?'visible':'collapsed'}}" />
                 <TextField id="correo" hint="Correo"  keyboardType="email" autocorrect="false" autocapitalizationType="none" propertyChange="textChange" />
